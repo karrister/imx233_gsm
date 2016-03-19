@@ -28,7 +28,8 @@ class BusDriver:
     def syncRead(self):
         #stub for a blocking UART read until end of AT command
 
-
+    def syncWrite(self, uartString):
+        #stub for a blocking UART write
 
 
 
