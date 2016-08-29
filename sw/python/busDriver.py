@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # Author: 
-#    Karri Kivelä
+#    Karri Kivela
 #
 # Description:
 #    This is the comms bus driver, in
@@ -19,7 +19,7 @@ class BusDriver:
         #TODO: remove this state change if implement non Blocking constructor
         isBusInitialized = True
         
-    def isBusInitialed(self):
+    def isBusInitialized(self):
         return self.isBusInitialized
 
     def isBusInErrorState(self):
@@ -27,9 +27,11 @@ class BusDriver:
 
     def syncRead(self):
         #stub for a blocking UART read until end of AT command
+		print "Only a stub for now"
 
     def syncWrite(self, uartString):
         #stub for a blocking UART write
+		print "Only a stub for now"
 
 
 

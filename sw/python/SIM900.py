@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # Author: 
-#    Karri Kivelä
+#    Karri Kivela
 #
 # Description:
 #    This is the file for SIM900 specific logic, such as
@@ -19,7 +19,7 @@ class SIM900:
         #TODO: remove this state change if implement non Blocking constructor
         isChipInitialized = True
         
-    def isChipInitialed(self):
+    def isChipInitialized(self):
         return self.isChipInitialized
 
     def isChipInErrorState(self):

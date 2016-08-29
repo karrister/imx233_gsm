@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # Author: 
-#    Karri Kivelä
+#    Karri Kivela
 #
 # Description:
 #    This is the main file for the Python mobile phone application.
@@ -23,7 +23,7 @@ def mainPhoneProcess(modem, bus, keypad, screen):
         if modem.isChipInErrorState() == True:
             noErrorDetected = False
 
-        if keypad.isUserActionWaiting():
+        if keypad.isUserActionWaiting() == True:
 
             userAction = keypad.getUserAction()
             screen.updateScreen(userAction)
@@ -35,10 +35,12 @@ def mainPhoneProcess(modem, bus, keypad, screen):
         screen.updateScreen(parsedAction)
         rawATResponse = parser.buildATResponseForAction(parsedAction)
         bus.syncWrite(rawATResponse)
+
+        print "DEBUG: Main loop"
     #Loop while noErrorDetected
 
 
-def phoneStart();
+def phoneStart():
 
     bus = BusDriver()
 
@@ -70,6 +72,10 @@ def phoneStart();
     #This call will be blocking for the lifetime of the app
     #and return only after an error was detected
     mainPhoneProcess(modem, bus, keypad, screen)
+	
+	
+if __name__ == "__main__":
+    phoneStart()
 
 
 

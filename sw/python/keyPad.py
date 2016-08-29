@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # Author: 
-#    Karri Kivelä
+#    Karri Kivela
 #
 # Description:
 #    This is the file for controlling the key pad
@@ -9,12 +9,13 @@
 class Keypad:
 
     isInErrorState = False
-    isUserActionWaiting
-    userAction
+    isUserActionWaiting = False
+    #userAction
 
     def __init__(self):
-        self.isUserActionWaiting = False
-        self.userAction = Action()
+        #self.isUserActionWaiting = False
+        #self.userAction = Action()
+        print "Need to implement Class Action!"
 
     def isInErrorState(self):
         return self.isInErrorState
