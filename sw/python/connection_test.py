@@ -11,8 +11,10 @@ CREG_NETWORK_UP_STATUSES = (1 << 5 | 1 << 1) # 5 = registered, roaming. 1 = regi
 IC_OK_TIMEOUT_SECS = 10
 GSM_NETWORK_CONN_TIMEOUT_SECS = 120
 READ_TIMEOUT_SECS = 2
-SERIAL_DEV_NAME = "COM20"
 BAUDRATE = 19200
+#Serial has different pointer in different OS and board
+SERIAL_DEV_NAME = "COM20" #Windows
+#SERIAL_DEV_NAME = "/dev/ttyAPP0" #Linux imx233
 
 def disable_uart_echo_mode():
 	
