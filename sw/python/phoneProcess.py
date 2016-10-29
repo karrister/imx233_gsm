@@ -12,10 +12,12 @@ from keyPad import Keypad
 from busDriver import BusDriver
 from screen import Screen
 from SIM900 import SIM900
+from actionParser import ActionParser
 
 def mainPhoneProcess(modem, bus, keypad, screen):
 
     parser = ATParser()
+	actionParser = ActionParser()
     noErrorDetected = True
 
     while noErrorDetected == True:
@@ -26,15 +28,11 @@ def mainPhoneProcess(modem, bus, keypad, screen):
         if keypad.isUserActionWaiting() == True:
 
             userAction = keypad.getUserAction()
-            screen.updateScreen(userAction)
-            rawATResponse = parser.buildATResponseForAction(userAction)
-            bus.syncWrite(rawATResponse)
+            actionParser.parseAction(userAction)
         
         rawATCommand = bus.syncRead()
         parsedAction = parser.parseATCommand(rawATCommand)
-        screen.updateScreen(parsedAction)
-        rawATResponse = parser.buildATResponseForAction(parsedAction)
-        bus.syncWrite(rawATResponse)
+		actionParser.parseAction(parsedAction)
 
         print "DEBUG: Main loop"
     #Loop while noErrorDetected
