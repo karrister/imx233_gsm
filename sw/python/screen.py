@@ -16,5 +16,12 @@ class Screen:
         return self.isInErrorState
 
     def updateScreen(self, action):
-        #stub for updating the screen
-		print "Only a stub for now"
+        
+		if action.incomingCall == True and action.hasUserAnsweredCall == False:
+			#Update screen for incoming call state
+			
+		if action.incomingCall == True and action.hasUserAnsweredCall == True:
+			#Update screen for incoming call state that was answered
+
+		if action.incomingCall == False and action.hasUserAnsweredCall == False:
+			#Update screen for idle state
