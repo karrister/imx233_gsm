@@ -1,11 +1,13 @@
 #!/usr/bin/python
 # Author: 
-#    Karri Kivela
+#	Karri Kivela
 #
 # Description:
-#    This is the comms bus driver, in
+#	This is the comms bus driver, in
 # this case the UART driver that takes
 # care of communication with the Chip.
+
+import serial
 
 AT_CMD_ECHO_ENABLE = b'ATE1\r\n'
 AT_CMD_ECHO_DISABLE = b'ATE0\r\n'
@@ -17,22 +19,22 @@ SERIAL_DEV_NAME = "COM20" #Windows
 
 class BusDriver:
 
-    isBusInitialized = False
-    isBusInErrorState = False
-	busContext
+	isBusInitialized = False
+	isBusInErrorState = False
+	busContext = serial.Serial()
 
-    #Currently the constructor will do a blocking init,
-    #returning to the user only after Chip is up
-    def __init__(self, isBlockingInit = True):
-        
-        #TODO: remove this state change if implement non Blocking constructor
-        isBusInitialized = True
+	#Currently the constructor will do a blocking init,
+	#returning to the user only after Chip is up
+	def __init__(self, isBlockingInit = True):
+		
+		#TODO: remove this state change if implement non Blocking constructor
+		isBusInitialized = True
 
-    def isBusInitialized(self):
-        return self.isBusInitialized
+	def isBusInitialized(self):
+		return self.isBusInitialized
 
-    def isBusInErrorState(self):
-        return self.isBusInErrorState
+	def isBusInErrorState(self):
+		return self.isBusInErrorState
 		
 	def openBus(self):
 		self.busContext = serial.Serial()
@@ -48,7 +50,7 @@ class BusDriver:
 		
 	def disable_uart_echo_mode(self):
 		
-		if isBusInitialized() == False or isBusInErrorState() == True:
+		if self.isBusInitialized() == False or self.isBusInErrorState() == True:
 			return
 			
 		print "Disabling echoing of written UART characters..."
@@ -62,7 +64,7 @@ class BusDriver:
 			
 	def enable_uart_echo_mode(self):
 	
-		if isBusInitialized() == False or isBusInErrorState() == True:
+		if self.isBusInitialized() == False or self.isBusInErrorState() == True:
 			return
 		
 		print "Enabling echoing of written UART characters..."
@@ -75,9 +77,9 @@ class BusDriver:
 			return
 
 	#Blocking read
-    def syncRead(self):
+	def syncRead(self):
 	
-		if isBusInitialized() == False or isBusInErrorState() == True:
+		if self.isBusInitialized() == False or self.isBusInErrorState() == True:
 			return
 	
 		try:
@@ -92,11 +94,11 @@ class BusDriver:
 		return busContext_string
 
 	#Blocking write
-    def syncWrite(self, uartString):
-        #stub for a blocking UART write
+	def syncWrite(self, uartString):
+		#stub for a blocking UART write
 		print "Only a stub for now"
 		
-		if isBusInitialized() == False or isBusInErrorState() == True:
+		if self.isBusInitialized() == False or self.isBusInErrorState() == True:
 			return
 
 

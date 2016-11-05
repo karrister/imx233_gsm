@@ -1,21 +1,21 @@
 #!/usr/bin/python
 # Author: 
-#    Karri Kivela
+#	Karri Kivela
 #
 # Description:
-#    This is the file for logging the operation.
+#	This is the file for logging the operation.
 
 LOG_INFO = 0
 
 class Logger:
 
-    isInErrorState = False	
+	isInErrorState = False	
 
-    def __init__(self):
-        print "For now the logger supports only printing the message"
+	def __init__(self):
+		print "For now the logger supports only printing the message"
 		
 		
 	def pushLogMsg(string, verbosity = LOG_INFO):
-		print "V" + verbosity + ": " + string
+		print "TODO: fix logger" #"V" + verbosity + ": " + string
 
 	

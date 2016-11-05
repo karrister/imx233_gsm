@@ -1,13 +1,13 @@
 #!/usr/bin/python
 # Author: 
-#    Karri Kivela
+#	Karri Kivela
 #
 # Description:
-#    This is the file for actions.
+#	This is the file for actions.
 
 class Action:
 
-    isInErrorState = False
+	isInErrorState = False
 	#nextAction = 
 	incomingCall = False
 	hasUserAnsweredCall = False
@@ -16,8 +16,8 @@ class Action:
 	userDialedNumber = "0587155100"
 	
 
-    def __init__(self):
-        print "Only a stub for now"
+	def __init__(self):
+		print "Only a stub for now"
 
 	def setDialToNumber(self, numberString):
 		self.userDialedNumber = numberString

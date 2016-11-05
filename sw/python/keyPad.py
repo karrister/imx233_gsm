@@ -1,9 +1,9 @@
 #!/usr/bin/python
 # Author: 
-#    Karri Kivela
+#	Karri Kivela
 #
 # Description:
-#    This is the file for controlling the key pad
+#	This is the file for controlling the key pad
 # and any related logic.
 
 import time
@@ -12,30 +12,38 @@ BLOCKING_POLL_TIMEOUT_10S = 10
 
 class Keypad:
 
-    isInErrorState = False
-    isUserActionWaiting = False
-    #userAction
+	isInErrorState = False
+	userActionWaiting = False
 
-    def __init__(self, log):
-        #self.isUserActionWaiting = False
-        #self.userAction = Action()
-        print "Need to implement Class Action!"
+	def __init__(self, log):
+		#self.isUserActionWaiting = False
+		#self.userAction = Action()
+		print "Need to implement Class Action!"
 		self.log = log
 
-    def isInErrorState(self):
-        return self.isInErrorState
+	def isInErrorState(self):
+		return self.isInErrorState
+		
+	def getLatestKeypadState(self):
+		#TODO: query the HW
+		
+		self.userActionWaiting = False
+		
 
-    def isUserActionWaiting(self):
-        #TODO: Do a blocking query of the current status
-        return self.isUserActionWaiting
+	def isUserActionWaiting(self):
+		#Currently polls the status only when this func is called.
+		#Should be polling and updating in the background
+		self.getLatestKeypadState()
+		
+		return self.userActionWaiting
 
-    def getUserAction(self):
+	def getUserAction(self):
 		
 		action = Action()
 		
 		action.userDialedCall = True
 		
-        return action
+		return action
 		
 	#For now, this function blocks for a timeout until user
 	#action happens, or the timeout expires
