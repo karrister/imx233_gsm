@@ -36,7 +36,7 @@ class ActionParser:
 			self.screen.updateScreen(action)
 			self.keypad.waitForUserAction(action)
 			
-			rawATResponse = parser.buildATResponseForAction(userAction)
+			rawATResponse = parser.buildATResponseForAction(action)
 			self.bus.syncWrite(rawATResponse)
 			
 			#Update screen again after action
@@ -46,7 +46,7 @@ class ActionParser:
 
 			self.screen.updateScreen(action)
 			
-			rawATResponse = parser.buildATResponseForAction(userAction)
+			rawATResponse = parser.buildATResponseForAction(action)
 			self.bus.syncWrite(rawATResponse)
 			
 			#Update screen again after action

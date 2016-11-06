@@ -9,8 +9,6 @@
 
 import serial
 
-AT_CMD_ECHO_ENABLE = b'ATE1\r\n'
-AT_CMD_ECHO_DISABLE = b'ATE0\r\n'
 READ_TIMEOUT_SECS = 2
 BAUDRATE = 19200
 #Serial has different pointer in different OS and board
@@ -25,8 +23,9 @@ class BusDriver:
 
 	#Currently the constructor will do a blocking init,
 	#returning to the user only after Chip is up
-	def __init__(self, isBlockingInit = True):
-		
+	def __init__(self, log, isBlockingInit = True):
+		self.log = log
+		busContext = self.openBus()
 		#TODO: remove this state change if implement non Blocking constructor
 		isBusInitialized = True
 
@@ -37,44 +36,21 @@ class BusDriver:
 		return self.isBusInErrorState
 		
 	def openBus(self):
-		self.busContext = serial.Serial()
-		self.busContext.port = SERIAL_DEV_NAME
-		self.busContext.timeout = READ_TIMEOUT_SECS
-		self.busContext.baudrate = BAUDRATE
-		self.busContext.open()
-		isBusInitialized = True
+		try:
+			self.busContext = serial.Serial()
+			self.busContext.port = SERIAL_DEV_NAME
+			self.busContext.timeout = READ_TIMEOUT_SECS
+			self.busContext.baudrate = BAUDRATE
+			self.busContext.open()
+			isBusInitialized = True
+		except serial.serialutil.SerialException:
+			self.log.pushLogMsg("We got an exception attempting to open the serial!")
+			self.closeBus()
+			return
 		
 	def closeBus(self):
 		isBusInitialized = False
 		self.busContext.close()
-		
-	def disable_uart_echo_mode(self):
-		
-		if self.isBusInitialized() == False or self.isBusInErrorState() == True:
-			return
-			
-		print "Disabling echoing of written UART characters..."
-		
-		try:
-			self.syncWrite(AT_CMD_ECHO_DISABLE)
-		except serial.serialutil.SerialException:
-			print "We got an exception from the serial!"
-			self.closeBus()
-			return
-			
-	def enable_uart_echo_mode(self):
-	
-		if self.isBusInitialized() == False or self.isBusInErrorState() == True:
-			return
-		
-		print "Enabling echoing of written UART characters..."
-				
-		try:
-			self.syncWrite(AT_CMD_ECHO_ENABLE)
-		except serial.serialutil.SerialException:
-			print "We got an exception from the serial!"
-			self.closeBus()
-			return
 
 	#Blocking read
 	def syncRead(self):
@@ -85,9 +61,10 @@ class BusDriver:
 		try:
 			#time.sleep(READ_TIMEOUT_SECS)
 			busContext_string = self.busContext.readline()
-			#print busContext_string
+			
+			self.log.pushLogMsg("UART_R: " + busContext_string, 255)
 		except serial.serialutil.SerialException:
-			print "We got an exception from the serial!"
+			self.log.pushLogMsg("We got an exception from the serial!")
 			self.closeBus()
 			return
 			
@@ -95,10 +72,17 @@ class BusDriver:
 
 	#Blocking write
 	def syncWrite(self, uartString):
-		#stub for a blocking UART write
-		print "Only a stub for now"
 		
 		if self.isBusInitialized() == False or self.isBusInErrorState() == True:
+			return
+			
+		self.log.pushLogMsg("UART_W: " + uartString, 255)
+			
+		try:
+			self.busContext.write(uartString)
+		except serial.serialutil.SerialException:
+			self.log.pushLogMsg("We got an exception from the serial!")
+			self.closeBus()
 			return
 
 

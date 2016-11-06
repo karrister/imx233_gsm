@@ -11,13 +11,13 @@ class Action:
 	#nextAction = 
 	incomingCall = False
 	hasUserAnsweredCall = False
-	noCommand = True
+	noCommand = False
 	userDialedCall = False
 	userDialedNumber = "0587155100"
 	
 
-	def __init__(self):
-		print "Only a stub for now"
+	#def __init__(self):
+	#nothing
 
 	def setDialToNumber(self, numberString):
 		self.userDialedNumber = numberString

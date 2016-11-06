@@ -7,6 +7,7 @@
 # and any related logic.
 
 import time
+from action import Action
 
 BLOCKING_POLL_TIMEOUT_10S = 10
 
@@ -18,7 +19,7 @@ class Keypad:
 	def __init__(self, log):
 		#self.isUserActionWaiting = False
 		#self.userAction = Action()
-		print "Need to implement Class Action!"
+
 		self.log = log
 
 	def isInErrorState(self):

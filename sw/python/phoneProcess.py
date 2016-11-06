@@ -20,6 +20,8 @@ def mainPhoneProcess(screen, keypad, bus, modem, logger):
 	parser = ATParser(screen, keypad, bus, modem, logger)
 	actionParser = ActionParser(screen, keypad, bus, modem, logger)
 	noErrorDetected = True
+	
+	logger.pushLogMsg("Entering GSM main loop")
 
 	while noErrorDetected == True:
 
@@ -27,19 +29,15 @@ def mainPhoneProcess(screen, keypad, bus, modem, logger):
 			noErrorDetected = False
 
 		if keypad.isUserActionWaiting() == True:
-
 			userAction = keypad.getUserAction()
-			actionParser.parseAction(userAction)
+			actionParser.parseAction(userAction, parser)
 		
 		rawATCommand = bus.syncRead()
-		
-		#temp hack to make it run
-		rawATCommand = ""
 		
 		parsedAction = parser.parseATCommand(rawATCommand)
 		actionParser.parseAction(parsedAction, parser)
 
-		print "DEBUG: Main loop"
+		logger.pushLogMsg("DEBUG: Main loop", 255)
 	#Loop while noErrorDetected
 	
 	print "DEBUG: Exit main application"
@@ -48,8 +46,10 @@ def mainPhoneProcess(screen, keypad, bus, modem, logger):
 def phoneStart():
 
 	logger = Logger()
+	
+	logger.pushLogMsg("Starting GSM main process")
 
-	bus = BusDriver()
+	bus = BusDriver(logger)
 
 	while bus.isBusInitialized() == False:
 
@@ -59,7 +59,7 @@ def phoneStart():
 			logger.pushLogMsg("Init: Bus error!")
 			return
 
-	modem = SIM900(bus) #Constructor starts the Chip init
+	modem = SIM900(bus, logger) #Constructor starts the Chip init
 
 	while modem.isChipInitialized() == False:
 		
