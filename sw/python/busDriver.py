@@ -43,7 +43,7 @@ class BusDriver:
 			self.busContext.baudrate = BAUDRATE
 			self.busContext.open()
 			isBusInitialized = True
-		except serial.serialutil.SerialException:
+		except: #serial.serialutil.SerialException:
 			self.log.pushLogMsg("We got an exception attempting to open the serial!")
 			self.closeBus()
 			return
@@ -63,7 +63,7 @@ class BusDriver:
 			busContext_string = self.busContext.readline()
 			
 			self.log.pushLogMsg("UART_R: " + busContext_string, 255)
-		except serial.serialutil.SerialException:
+		except: #serial.serialutil.SerialException:
 			self.log.pushLogMsg("We got an exception from the serial!")
 			self.closeBus()
 			return
@@ -80,7 +80,7 @@ class BusDriver:
 			
 		try:
 			self.busContext.write(uartString)
-		except serial.serialutil.SerialException:
+		except: #serial.serialutil.SerialException:
 			self.log.pushLogMsg("We got an exception from the serial!")
 			self.closeBus()
 			return
