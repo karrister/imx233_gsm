@@ -52,7 +52,8 @@ class Screen:
 		
 
 	def updateScreen(self, action):
-		
+		#TODO: update this section, currently this looks like VB/assembly
+
 		if action.incomingCall == True and action.hasUserAnsweredCall == False:
 			self.setScreenText("Ringing")
 			self.turnLedOn()
@@ -61,7 +62,11 @@ class Screen:
 			self.setScreenText("Answered")
 			self.turnLedOn()
 
-		if action.incomingCall == False and action.hasUserAnsweredCall == False:
+		if action.userDialedCall == True:
+			self.setScreenText("Dialing")
+			self.turnLedOn()
+
+		if action.incomingCall == False and action.hasUserAnsweredCall == False and action.userDialedCall == False:
 			self.setScreenText(self.idleText)
 			self.turnLedOff()
 			
