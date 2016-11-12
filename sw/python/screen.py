@@ -25,10 +25,22 @@ class Screen:
 		
 	def turnLedOn(self):
 		#TODO: write to HW
+
+		#mock for writing to a temp file
+		fd = open('/tmp/led.txt', 'w')
+		fd.write('1')
+		fd.close()
+
 		self.ledState = True
 	
 	def turnLedOff(self):
 		#TODO: write to HW
+
+		#mock for writing to a temp file
+		fd = open('/tmp/led.txt', 'w')
+		fd.write('0')
+		fd.close()
+
 		self.ledState = False
 		
 	def setScreenText(self, string):
@@ -43,10 +55,13 @@ class Screen:
 		
 		if action.incomingCall == True and action.hasUserAnsweredCall == False:
 			self.setScreenText("Ringing")
+			self.turnLedOn()
 			
 		if action.incomingCall == True and action.hasUserAnsweredCall == True:
 			self.setScreenText("Answered")
+			self.turnLedOn()
 
 		if action.incomingCall == False and action.hasUserAnsweredCall == False:
 			self.setScreenText(self.idleText)
+			self.turnLedOff()
 			

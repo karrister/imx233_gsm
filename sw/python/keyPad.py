@@ -27,8 +27,16 @@ class Keypad:
 		
 	def getLatestKeypadState(self):
 		#TODO: query the HW
-		
-		self.userActionWaiting = False
+
+		#Mock for the GPIO for the button
+		fd = open('/tmp/gpio.txt', 'r')
+		mock_status = fd.read(1)
+		fd.close()
+
+		if mock_status == "1":
+			self.userActionWaiting = True
+		else:
+			self.userActionWaiting = False
 		
 
 	def isUserActionWaiting(self):
