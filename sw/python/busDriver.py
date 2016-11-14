@@ -62,7 +62,8 @@ class BusDriver:
 			#time.sleep(READ_TIMEOUT_SECS)
 			busContext_string = self.busContext.readline()
 			
-			self.log.pushLogMsg("UART_R: " + busContext_string, 255)
+			if isinstance(busContext_string, str):
+				self.log.pushLogMsg("UART_R: " + busContext_string, 255)
 		except: #serial.serialutil.SerialException:
 			self.log.pushLogMsg("We got an exception from the serial!")
 			self.closeBus()
@@ -76,7 +77,8 @@ class BusDriver:
 		if self.isBusInitialized() == False or self.isBusInErrorState() == True:
 			return
 			
-		self.log.pushLogMsg("UART_W: " + uartString, 255)
+		if isinstance(uartString, str):
+			self.log.pushLogMsg("UART_W: " + uartString, 255)
 			
 		try:
 			self.busContext.write(uartString)
