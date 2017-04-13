@@ -12,7 +12,7 @@ from logger import Logger
 ##################
 #AT commands list#
 ##################
-AT_CMD_ANSWER_CALL = b'ATA\r\n'
+AT_CMD_ANSWER_CALL = b'ATA'
 AT_CMD_DIAL_CALL = b'ATD'
 AT_CMD_EOL = b'\r\n'
 
@@ -56,10 +56,10 @@ class ATParser:
 	def buildATResponseForAction(self, action):
 		
 		if action.incomingCall == True and action.hasUserAnsweredCall == True:
-			return AT_CMD_ANSWER_CALL
+			return AT_CMD_ANSWER_CALL + AT_CMD_EOL
 			
 		if action.userDialedCall == True:
-			return AT_CMD_DIAL_CALL + action.getDialToNumber() + AT_CMD_EOL
+			return AT_CMD_DIAL_CALL + action.getDialToNumber() + ";"  + AT_CMD_EOL #semicolon after dial number
 
 		
 

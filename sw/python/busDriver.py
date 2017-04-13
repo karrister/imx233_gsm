@@ -12,8 +12,9 @@ import serial
 READ_TIMEOUT_SECS = 2
 BAUDRATE = 19200
 #Serial has different pointer in different OS and board
-SERIAL_DEV_NAME = "COM20" #Windows
+#SERIAL_DEV_NAME = "COM20" #Windows
 #SERIAL_DEV_NAME = "/dev/ttyAPP0" #Linux imx233
+SERIAL_DEV_NAME = "/dev/ttyUSB0" #FTDI USB serial
 
 class BusDriver:
 
