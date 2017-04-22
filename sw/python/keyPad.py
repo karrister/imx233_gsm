@@ -11,6 +11,10 @@ from action import Action
 
 BLOCKING_POLL_TIMEOUT_10S = 10
 
+#Mock for the GPIO for the button
+#BUTTON1_FILE_HANDLE = '/tmp/gpio.txt'
+BUTTON1_FILE_HANDLE = '/sys/class/gpio/gpio92/value'
+
 class Keypad:
 
 	isInErrorState = False
@@ -28,8 +32,7 @@ class Keypad:
 	def getLatestKeypadState(self):
 		#TODO: query the HW
 
-		#Mock for the GPIO for the button
-		fd = open('/tmp/gpio.txt', 'r')
+		fd = open(BUTTON1_FILE_HANDLE, 'r')
 		mock_status = fd.read(1)
 		fd.close()
 

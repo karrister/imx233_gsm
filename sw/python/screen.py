@@ -5,6 +5,10 @@
 # Description:
 #	This is the file for controlling the screen
 
+#mock for writing to a temp file
+#LED1_FILE_HANDLE = '/tmp/led.txt'
+LED1_FILE_HANDLE = '/sys/class/gpio/gpio91/value'
+
 class Screen:
 
 	isInErrorState = False
@@ -27,7 +31,7 @@ class Screen:
 		#TODO: write to HW
 
 		#mock for writing to a temp file
-		fd = open('/tmp/led.txt', 'w')
+		fd = open(LED1_FILE_HANDLE, 'w')
 		fd.write('1')
 		fd.close()
 
@@ -37,7 +41,7 @@ class Screen:
 		#TODO: write to HW
 
 		#mock for writing to a temp file
-		fd = open('/tmp/led.txt', 'w')
+		fd = open(LED1_FILE_HANDLE, 'w')
 		fd.write('0')
 		fd.close()
 
