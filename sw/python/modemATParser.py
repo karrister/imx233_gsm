@@ -40,12 +40,17 @@ class ATParser:
 			action.isInErrorState = True
 			return action
 		
-		#if rawATCommand.toString()[:4] == "RING":
 		if rawATCommand[:4] == "RING":
 			action.incomingCall = True
 			action.isInErrorState = False
 			action.noCommand = False
 			self.log.pushLogMsg("Incoming call")
+
+		if rawATCommand[:10] == "NO CARRIER" or rawATCommand[:9] == "NO ANSWER":
+			action.incomingCall = False
+			action.isInErrorState = False
+			action.noCommand = False
+			self.log.pushLogMsg("Call disconnected")
 			
 		
 		if action.noCommand == True:

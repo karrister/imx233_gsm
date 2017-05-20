@@ -31,9 +31,10 @@ class ActionParser:
 		if action.noCommand == True:
 			self.log.pushLogMsg("Not attempting to parse action for a NOP command")
 			return
+
+		self.screen.updateScreen(action)
 		
 		if action.incomingCall == True:
-			self.screen.updateScreen(action)
 			self.keypad.waitForUserAction(action)
 			
 			rawATResponse = parser.buildATResponseForAction(action)
@@ -43,9 +44,6 @@ class ActionParser:
 			self.screen.updateScreen(action)
 			
 		if action.userDialedCall == True:
-
-			self.screen.updateScreen(action)
-			
 			rawATResponse = parser.buildATResponseForAction(action)
 			self.bus.syncWrite(rawATResponse)
 			

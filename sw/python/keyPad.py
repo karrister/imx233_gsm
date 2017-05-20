@@ -33,10 +33,10 @@ class Keypad:
 		#TODO: query the HW
 
 		fd = open(BUTTON1_FILE_HANDLE, 'r')
-		mock_status = fd.read(1)
+		button1_status = fd.read(1)
 		fd.close()
 
-		if mock_status == "1":
+		if button1_status == "1":
 			self.userActionWaiting = True
 		else:
 			self.userActionWaiting = False
