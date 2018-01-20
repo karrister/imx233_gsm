@@ -50,6 +50,7 @@ class ATParser:
 			action.incomingCall = False
 			action.isInErrorState = False
 			action.noCommand = False
+			action.callDisconnected = True
 			self.log.pushLogMsg("Call disconnected")
 			
 		

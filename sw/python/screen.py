@@ -69,7 +69,11 @@ class Screen:
 		if action.userDialedCall == True:
 			self.setScreenText("Dialing")
 			self.turnLedOn()
-
+			
+		if action.callDisconnected == True:
+			self.setScreenText("Call disconnected")
+			self.turnLedOff()
+			
 		if action.incomingCall == False and action.hasUserAnsweredCall == False and action.userDialedCall == False:
 			self.setScreenText(self.idleText)
 			self.turnLedOff()

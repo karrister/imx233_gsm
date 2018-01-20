@@ -49,6 +49,10 @@ class ActionParser:
 			
 			#Update screen again after action
 			self.screen.updateScreen(action)
+			
+		if action.callDisconnected == True:
+			#Update screen again after action
+			self.screen.updateScreen(action)
 		
 	def screenAction(action):
 		print "Is this func needed?"

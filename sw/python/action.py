@@ -13,8 +13,8 @@ class Action:
 	hasUserAnsweredCall = False
 	noCommand = False
 	userDialedCall = False
-	userDialedNumber = "0587155100"
-	
+	userDialedNumber = "0587155100" #For now the phone number
+	callDisconnected = False
 
 	#def __init__(self):
 	#nothing
